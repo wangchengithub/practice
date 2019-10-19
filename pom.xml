@@ -13,6 +13,7 @@
         <module>web</module>
         <module>web2</module>
         <module>api</module>
+        <module>core</module>
     </modules>
 
     <parent>

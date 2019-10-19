@@ -1,4 +1,4 @@
-package com.practice.web.dubbo.api;
+package com.practice.dubbo.api;
 
 public interface DubboTest {
 

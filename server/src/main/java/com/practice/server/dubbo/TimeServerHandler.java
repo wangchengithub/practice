@@ -1,4 +1,4 @@
-package com.practice.web.dubbo.server;
+package com.practice.server.dubbo;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
