@@ -1,12 +1,12 @@
 package com.practice.web;
 
-import com.practice.web.json.MyValue;
-import org.redisson.Redisson;
-import org.redisson.api.*;
-import org.redisson.config.Config;
-
 import java.io.File;
-import java.util.concurrent.TimeUnit;
+
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.api.RedissonReactiveClient;
+import org.redisson.api.RedissonRxClient;
+import org.redisson.config.Config;
 
 public class RedissonLock {
 
@@ -29,7 +29,7 @@ public class RedissonLock {
         // RxJava2 API
         RedissonRxClient redissonRx = Redisson.createRx(config);
         // 3. Get Redis based Map
-        RMap<MyKey, MyValue> map = redisson.getMap("myMap");
+        /*RMap<MyKey, MyValue> map = redisson.getMap("myMap");
 
         RMapReactive<MyKey, MyValue> mapReactive = redissonReactive.getMap("myMap");
 
@@ -45,7 +45,7 @@ public class RedissonLock {
         RLockRx lockRx = redissonRx.getLock("myLock");
 
         // 4. Get Redis based ExecutorService
-        RExecutorService executor = redisson.getExecutorService("myExecutorService");
+        RExecutorService executor = redisson.getExecutorService("myExecutorService");*/
 
         // over 30 different Redis based objects and services ...
     }

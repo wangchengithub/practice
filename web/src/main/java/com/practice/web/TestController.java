@@ -1,19 +1,32 @@
-package com.practice.web.dubbo.client;
+package com.practice.web;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.practice.dubbo.api.DubboTest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.practice.dubbo.api.DubboTest;
+import com.practice.web.proxy.aspect.AspectTestService;
 
 @RestController
 public class TestController {
 
     @Reference
     private DubboTest dubboTest;
+
+    @Autowired
+    private AspectTestService aspectTestService;
+
+    @GetMapping("/test-request-param")
+    public LocalDate testRequestParam(@RequestParam LocalDate day) {
+        return LocalDate.now();
+    }
 
     @GetMapping("/dubbo-test")
     public void dubboTest() {
@@ -31,12 +44,8 @@ public class TestController {
         return "successsuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccesssuccess";
     }
 
-    @GetMapping("/url-test")
-    public String test(String b, String redirect) {
-        return redirect + "      " + b;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(URLEncoder.encode("http://baidu.com?a=c&b=e"));
+    @GetMapping("/aspect-test")
+    public void aspectTest() {
+        aspectTestService.aspectTest();
     }
 }

@@ -1,4 +1,4 @@
-package com.practice.server.proxy;
+package com.practice.web.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

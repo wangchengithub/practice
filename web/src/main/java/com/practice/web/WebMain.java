@@ -1,14 +1,17 @@
 package com.practice.web;
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 
 @SpringBootApplication
 @EnableDubbo(scanBasePackages = "com.practice.web.dubbo.client")
+@Import({WebConfiguration.class})
 public class WebMain {
 
     @Bean
