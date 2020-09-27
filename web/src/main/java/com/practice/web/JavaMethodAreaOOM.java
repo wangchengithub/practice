@@ -44,7 +44,7 @@ public class JavaMethodAreaOOM {
         for(int i=0;i<nums.length;i++){
             List<List<Integer>> tm  = new ArrayList();
             for(int j = 0; j< result.size();j++){
-                tm.add(new ArrayList<Integer>(result.get(j)){{add(nums[i]);}});
+                //tm.add(new ArrayList<Integer>(result.get(j)){{add(nums[i]);}});
             }
             result.addAll(tm);
         }
