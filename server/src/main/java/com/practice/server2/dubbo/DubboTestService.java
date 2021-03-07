@@ -1,4 +1,4 @@
-package com.practice.server.dubbo;
+package com.practice.server2.dubbo;
 
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
