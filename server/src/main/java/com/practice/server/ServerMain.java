@@ -1,6 +1,6 @@
-package com.practice.server2;
+package com.practice.server;
 
-import com.practice.server2.dubbo.DubboTestService;
+import com.practice.server.dubbo.DubboTestService;
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;

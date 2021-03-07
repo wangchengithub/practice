@@ -1,4 +1,4 @@
-package com.practice.server2.dubbo;
+package com.practice.server.dubbo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
