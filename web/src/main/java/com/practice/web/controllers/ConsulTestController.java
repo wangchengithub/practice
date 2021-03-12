@@ -17,6 +17,13 @@ public class ConsulTestController {
 
     @RequestMapping("/instance-id")
     public String instanceId() {
+        //throw new RuntimeException("abc");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("done");
         return environment.getProperty("spring.cloud.consul.discovery.instanceId");
     }
 }
