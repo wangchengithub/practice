@@ -67,6 +67,9 @@ public class GatewayConfiguration {
                         .uri("http://localhost:9090"))
                 .route("websocket_route", r -> r.path("/echo")
                         .uri("ws://localhost:9000"))
+                //直接访问http://localhost:8090/web/api/instance-id?user=1是可以的
+                //这样lb好像不生效，没调通
+                //.route("consul_test",r->r.path("/consul-test/**").uri("lb://web"))
                 .build();
     }
 }
