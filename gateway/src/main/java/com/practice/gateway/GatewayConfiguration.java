@@ -16,8 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Configuration
 public class GatewayConfiguration {
 
@@ -53,23 +55,20 @@ public class GatewayConfiguration {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder, BeforeRoutePredicateFactory beforeRoutePredicateFactory) {
         //@formatter:off
         return builder.routes()
-                .route("path_route", r -> r.path("/get")
-                        .uri("http://httpbin.org"))
-                .route("host_route", r -> r.host("*.myhost.org")
-                        .uri("http://httpbin.org"))
-                .route("rewrite_route", r -> r.host("*.rewrite.org")
-                        .filters(f -> f.rewritePath("/foo/(?<segment>.*)",
-                                "/${segment}"))
-                        .uri("http://httpbin.org"))
+                .route("path_route", r -> r
+                        .host("localhost:8090").and().path("/api/test")
+                        .uri("http://localhost:9091"))
                 .route("limit_route", r -> r
                         .host("localhost:8090").and().path("/api/instance-id")
                         .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter())))
+                        .uri("http://localhost:9091/api/instance-id"))
+                .route("retry-test", r -> r.path("/api/retry")
+                        .filters(f -> f.retry(3))
+                        .uri("lb://web"))
+                .route("fallback-test", r -> r.path("/fall")
+                        .filters(f -> f.circuitBreaker(c -> c.setName("myCircuitBreaker")))
                         .uri("http://localhost:9090"))
-                .route("websocket_route", r -> r.path("/echo")
-                        .uri("ws://localhost:9000"))
-                //直接访问http://localhost:8090/web/api/instance-id?user=1是可以的
-                //这样lb好像不生效，没调通
-                //.route("consul_test",r->r.path("/consul-test/**").uri("lb://web"))
+                //直接访问http://localhost:8090/web/api/instance-id?user=1可访问consul中的服务
                 .build();
     }
 }

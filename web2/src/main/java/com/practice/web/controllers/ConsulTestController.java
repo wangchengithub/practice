@@ -19,4 +19,16 @@ public class ConsulTestController {
     public String instanceId() {
         return environment.getProperty("spring.cloud.consul.discovery.instanceId");
     }
+
+    @RequestMapping("/test")
+    public String test() {
+        return "hello web2";
+    }
+
+    @RequestMapping("/retry")
+    public String retry() {
+        log.info("retry");
+        throw new RuntimeException("error le");
+        //return "hello web2 retry";
+    }
 }
